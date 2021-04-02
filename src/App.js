@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import logo from './images/img_react-gsap.png';
 import './App.css';
@@ -22,9 +22,20 @@ const sections = [
 ];
 
 const App = () => {
+  const headerRef = useRef(null);
+
+  useEffect(() => {
+    gsap.from(headerRef.current, {
+      duration: 1,
+      autoAlpha: 0,
+      ease: 'none',
+      delay: 1,
+    });
+  }, []);
+
   return (
     <div className='App'>
-      <header className='App-header'>
+      <header ref={headerRef} className='App-header'>
         <img src={logo} className='App-logo' alt='logo' />
 
         <p>Scroll down to see sections being revealed by ScrollTrigger.</p>
